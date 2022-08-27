@@ -1,0 +1,48 @@
+﻿@page
+@using GraduationProject.ApplicationLogic.Services
+@using Microsoft.AspNetCore.Identity
+@model GraduationProject.Pages.Events.CreateModel
+@inject EventService eventService;
+@inject UserManager<IdentityUser> userManager;
+
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="eventCreationForm" method="post">
+            <h2>Create a new event.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.Name" class="form-control" autocomplete="event" aria-required="true" />
+                <label asp-for="Input.Name"></label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <textarea asp-for="Input.Description" class="form-control" aria-required="true"></textarea>
+                <label asp-for="Input.Description"></label>
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Image" class="form-control" aria-required="true" />
+                <label asp-for="Input.Image"></label>
+                <span asp-validation-for="Input.Image" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.StartDate" class="form-control" aria-required="true" />
+                <label asp-for="Input.StartDate"></label>
+                <span asp-validation-for="Input.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.EndDate" class="form-control" aria-required="true" />
+                <label asp-for="Input.EndDate"></label>
+                <span asp-validation-for="Input.EndDate" class="text-danger"></span>
+            </div>
+            <button id="eventCreateSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Create Event</button>
+        </form>
+    </div>
+</div>

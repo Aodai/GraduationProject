@@ -1,0 +1,50 @@
+﻿@page "{id}"
+@model GraduationProject.Pages.Events.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="eventUpdateForm" method="post">
+            <h2>Create a new event.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <div class="form-floating">
+                <input asp-for="Evnt.Id" type="hidden" class="form-control" aria-required="true" />
+            </div>
+             <div class="form-floating">
+                <input asp-for="Evnt.OrganiserId" type="hidden" class="form-control" aria-required="true" />
+            </div>
+            <div class="form-floating">
+                <input asp-for="Evnt.Name" class="form-control" autocomplete="event" aria-required="true" />
+                <label asp-for="Evnt.Name"></label>
+                <span asp-validation-for="Evnt.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <textarea asp-for="Evnt.Description" class="form-control" aria-required="true"></textarea>
+                <label asp-for="Evnt.Description"></label>
+                <span asp-validation-for="Evnt.Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Evnt.Image" class="form-control" aria-required="true" />
+                <label asp-for="Evnt.Image"></label>
+                <span asp-validation-for="Evnt.Image" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Evnt.StartDate" class="form-control" aria-required="true" />
+                <label asp-for="Evnt.StartDate"></label>
+                <span asp-validation-for="Evnt.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Evnt.EndDate" class="form-control" aria-required="true" />
+                <label asp-for="Evnt.EndDate"></label>
+                <span asp-validation-for="Evnt.EndDate" class="text-danger"></span>
+            </div>
+            <button id="eventEditSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Update Event</button>
+        </form>
+    </div>
+</div>
