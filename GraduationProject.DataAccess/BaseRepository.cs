@@ -2,7 +2,7 @@
 
 namespace GraduationProject.DataAccess
 {
-    public class BaseRepository<T> : IRepository<T> where T : class
+    public class BaseRepository<T> : IRepository<T> where T : class, new()
     {
         protected readonly ApplicationDbContext dbContext;
 
@@ -32,7 +32,7 @@ namespace GraduationProject.DataAccess
         {
             var ent = dbContext.Update<T>(entity);
             dbContext.SaveChanges();
-            return entity;
+            return ent.Entity;
         }
     }
 }

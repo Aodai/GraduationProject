@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationProject", "GraduationProject\GraduationProject.csproj", "{6976C004-B288-442E-B6CE-F012A54DB132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationProject.DataAccess", "GraduationProject.DataAccess\GraduationProject.DataAccess.csproj", "{2CAE82D0-0FD6-40EA-A76D-C14EB220D820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationProject.DataAccess", "GraduationProject.DataAccess\GraduationProject.DataAccess.csproj", "{2CAE82D0-0FD6-40EA-A76D-C14EB220D820}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationProject.ApplicationLogic", "GraduationProject.ApplicationLogic\GraduationProject.ApplicationLogic.csproj", "{DEBE4F75-F729-4992-A10C-4F095A5E6E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationProject.ApplicationLogic", "GraduationProject.ApplicationLogic\GraduationProject.ApplicationLogic.csproj", "{DEBE4F75-F729-4992-A10C-4F095A5E6E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
