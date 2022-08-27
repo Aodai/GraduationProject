@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GraduationProject.DataAccess;
 using Serilog;
+using GraduationProject.ApplicationLogic.Abstractions;
+using GraduationProject.ApplicationLogic.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +21,25 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<EventService>();
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAuthenticated",
+            policy => policy.RequireAuthenticatedUser());
+    options.AddPolicy("RequireUserRole",
+            policy => policy.RequireRole("User"));
+    options.AddPolicy("RequireAdminRole",
+            policy => policy.RequireRole("Admin"));
+});
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Events", "RequireAuthenticated");
+});
 
 var app = builder.Build();
 
