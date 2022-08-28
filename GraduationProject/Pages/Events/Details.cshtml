@@ -1,4 +1,31 @@
-﻿@page
+﻿@page "{id}"
+@using Microsoft.AspNetCore.Identity
 @model GraduationProject.Pages.Events.DetailsModel
+@inject UserManager<IdentityUser> userManager;
+
 @{
+    ViewData["Title"] = $"{Model.Evnt.Name}";
 }
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container-fluid">
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="@Model.Evnt.Image" class="img-fluid" alt="@Model.Evnt.Name" />
+        </div>
+        <div class="p-2">
+            <p class="fw-bold fs-6">
+                Event start: @Model.Evnt.StartDate
+                <br />
+                Event end: @Model.Evnt.EndDate
+            </p>
+            <p class="fw-bold fs-6">
+                Organised by @userManager.FindByIdAsync(Model.Evnt.OrganiserId.ToString()).Result.UserName
+            </p>
+            <p class="fs-2">
+                @Model.Evnt.Description
+            </p>
+        </div>
+    </div>
+</div>
