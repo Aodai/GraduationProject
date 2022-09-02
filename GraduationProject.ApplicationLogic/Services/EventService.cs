@@ -6,7 +6,7 @@ namespace GraduationProject.ApplicationLogic.Services
 {
     public class EventService
     {
-        public IEventRepository eventRepository { get; set; }
+        private IEventRepository eventRepository { get; set; }
         
         public EventService(IEventRepository eventRepository)
         {

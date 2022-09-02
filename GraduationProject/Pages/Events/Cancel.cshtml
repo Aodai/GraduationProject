@@ -1,0 +1,16 @@
+﻿@page "{id}"
+@model GraduationProject.Pages.Events.CancelModel
+
+@{
+    ViewData["Title"] = $"Cancel attendance to {Model.Evnt.Name}";
+}
+
+<h1>Are you sure you want to cancel your attendance to "@Model.Evnt.Name"</h1>
+
+<div>
+    <form method="post">
+        <input type="hidden" asp-for="@Model.Evnt.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="/Events/Index">Back to List</a>
+    </form>
+</div>

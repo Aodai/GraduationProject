@@ -1,31 +1,48 @@
 ﻿@page "{id}"
+@using GraduationProject.ApplicationLogic.Services
 @using Microsoft.AspNetCore.Identity
 @model GraduationProject.Pages.Events.DetailsModel
 @inject UserManager<IdentityUser> userManager;
+@inject AttendeeService attendeeService;
 
 @{
     ViewData["Title"] = $"{Model.Evnt.Name}";
+    var user = await userManager.GetUserAsync(HttpContext.User);
 }
 
 <h1>@ViewData["Title"]</h1>
-
-<div class="container-fluid">
-    <div class="d-flex">
-        <div class="flex-shrink-0">
-            <img src="@Model.Evnt.Image" class="img-fluid" alt="@Model.Evnt.Name" />
-        </div>
-        <div class="p-2">
-            <p class="fw-bold fs-6">
-                Event start: @Model.Evnt.StartDate
-                <br />
-                Event end: @Model.Evnt.EndDate
-            </p>
-            <p class="fw-bold fs-6">
-                Organised by @userManager.FindByIdAsync(Model.Evnt.OrganiserId.ToString()).Result.UserName
-            </p>
-            <p class="fs-2">
-                @Model.Evnt.Description
-            </p>
-        </div>
+<p class="fw-bold fs-6">
+    Organised by @userManager.FindByIdAsync(Model.Evnt.OrganiserId.ToString()).Result.UserName
+</p>
+<div class="d-flex align-items-start">
+    <img src="@Model.Evnt.Image" class="img-fluid" alt="@Model.Evnt.Name" />
+</div>
+<div class="d-flex align-items-start flex-wrap">
+    <p class="fw-bold fs-6">
+        Event start: @Model.Evnt.StartDate
+        <br />
+        Event end: @Model.Evnt.EndDate
+    </p>
+</div>
+<div class="d-flex align-items-center">
+    <p class="fs-2">
+        @Model.Evnt.Description
+    </p>
+</div>
+@if(!attendeeService.AlreadyInterested(user.Id, Model.Evnt.Id.ToString()))
+{
+    <div class="d-flex align-items-end">
+        <form method="post"><button class="btn btn-primary">Interested</button></form>
     </div>
+}
+<div class="d-flex align-items-end">
+    <p class="fw-bold fs-6">
+        Attendees:
+    </p>
+    <ul>
+        @foreach (var attendee in Model.AttendeeList)
+        {
+            <li>@attendee.UserName</li>
+        }
+    </ul>
 </div>

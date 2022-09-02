@@ -6,29 +6,38 @@
 @inject UserManager<IdentityUser> userManager;
 
 @{
-    ViewData["Title"] = "Events";
-    var events = eventService.GetEvents();
+    ViewData["Title"] = "Upcoming Events";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-@if(events is not null) {
-<div class="row row-cols-1 row-cols-md-3 g-4">
-@foreach (var item in events)
-{
-    <div class="col">
-        <div class="card h-100">
-            <img class="card-img-top" src="@item.Image" alt="Img" />
-
-            <div class="card-body">
-                <h5 class="card-title"><a href="/Events/Details/@item.Id">@item.Name</a></h5>
-                <p class="card-text">@item.Description</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Posted by @userManager.FindByIdAsync(item.OrganiserId.ToString()).Result.UserName</small>
-            </div>
-        </div>
-    </div>
-}
-</div>
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].StartDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Events)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    <a asp-page="/Events/Details" asp-route-id="@item.Id">View</a>
+                    <a asp-page="/Events/Cancel" asp-route-id="@item.Id">Cancel</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -16,6 +16,7 @@ namespace GraduationProject.Pages.Events
         {
             this.eventService = eventService;
             this.userManager = userManager;
+            Events = new List<Event>();
         }
 
         public async Task<IActionResult> OnGetAsync()

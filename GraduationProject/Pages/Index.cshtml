@@ -1,10 +1,27 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
 @model IndexModel
+@inject UserManager<IdentityUser> userManager;
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+@foreach (var item in @Model.Events)
+{
+    <div class="col">
+        <div class="card h-100">
+            <img class="card-img-top" src="@item.Image" alt="Img" />
+
+            <div class="card-body">
+                <h5 class="card-title"><a href="/Events/Details/@item.Id">@item.Name</a></h5>
+                <p class="card-text">@item.Description</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Posted by @userManager.FindByIdAsync(item.OrganiserId.ToString()).Result.UserName</small>
+            </div>
+        </div>
+    </div>
+}
 </div>
